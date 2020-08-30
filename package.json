@@ -1,0 +1,14 @@
+{
+  "name": "TGBot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon start"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "mongoose": "^5.9.28",
+    "telegraf": "^3.38.0"
+  }
+}
