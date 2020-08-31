@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "dotenv": "^8.2.0",
-    "mongoose": "^5.9.28",
+    "mongoose": "^5.10.2",
     "telegraf": "^3.38.0"
   }
 }

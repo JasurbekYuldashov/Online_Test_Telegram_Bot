@@ -1,10 +1,21 @@
-const {bot} = require("../core/bot")
+const {bot} = require("../core/bot");
+const {Markup} = require("telegraf");
+const {save, findByUserId} = require("../models/userModel")
 
 bot.start(ctx => {
-    ctx.reply(`Assalomu alaykum.\nXush kelibsiz ${ctx.from.first_name}
-    `).then(r=>console.log(r)).catch(error=>{console.log(error)})
+    if (findByUserId(ctx.chat)===true){
+        // const keyborad = Markup.keyboard([
+        //     Markup.callbackButton("salom","salom")
+        // ])
+        // ctx.telegram.sendMessage(
+        //     ctx.from.id,
+        //     "salom",
+        //     {
+        //         reply_markup:keyborad
+        //     }
+        // )
+        console.log("admin")
+    } else {
+        console.log("amin emas")
+    }
 })
-
-bot.on("new_chat_members",(ctx => {
-    console.log(ctx.chat.id)
-}))

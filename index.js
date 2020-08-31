@@ -1,4 +1,4 @@
 require('dotenv').config()
 
-require("./actions/index")
+require("./actions")
 require("./core")
