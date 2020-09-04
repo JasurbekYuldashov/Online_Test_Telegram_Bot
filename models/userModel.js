@@ -17,12 +17,10 @@ const User = new mongoose.model("User", userSchema)
 async function save(model) {
     const user = new User(model)
     const res = await user.save()
-    console.log(res)
 }
 
 async function findByUserId(findUser) {
     const user = await User.find({userId: findUser.id})
-    console.log(user)
     if (user.length === 0) {
         save({
             userId: findUser.id,
@@ -31,10 +29,9 @@ async function findByUserId(findUser) {
         })
         return false
     } else {
-        if (user[0].is_admin === true) {
-            return true
-        } else return false
+        return user[0].is_admin == true ? true : false;
     }
+    return false;
 }
 
 async function updateUserAdmin(userId) {

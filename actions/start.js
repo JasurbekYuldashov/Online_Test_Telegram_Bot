@@ -3,19 +3,34 @@ const {Markup} = require("telegraf");
 const {save, findByUserId} = require("../models/userModel")
 
 bot.start(ctx => {
-    if (findByUserId(ctx.chat)===true){
-        // const keyborad = Markup.keyboard([
-        //     Markup.callbackButton("salom","salom")
-        // ])
-        // ctx.telegram.sendMessage(
-        //     ctx.from.id,
-        //     "salom",
-        //     {
-        //         reply_markup:keyborad
-        //     }
-        // )
-        console.log("admin")
-    } else {
-        console.log("amin emas")
-    }
+    findByUserId(ctx.from).then(r=>{
+        if (r==true){
+            console.log("admin")
+            const keyboard = Markup.keyboard([
+                Markup.button("Yangi test yaratish"),
+                Markup.button("Tahrirlash"),
+            ])
+            ctx.telegram.sendMessage(
+                ctx.from.id,
+                "Kerakli buyruqni tanlang!",
+                {
+                    reply_markup:keyboard
+                }
+
+            )
+        } else {
+            console.log("admin emas")
+            const keyboard = Markup.keyboard([
+                Markup.button("Natijani bilish!")
+            ])
+            ctx.telegram.sendMessage(
+                ctx.from.id,
+                "Kerakli buyruqni tanlang!",
+                {
+                    reply_markup:keyboard
+                }
+
+            )
+        }
+    })
 })
