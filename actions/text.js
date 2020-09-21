@@ -2,7 +2,7 @@ const {bot} = require("../core/bot")
 const {updateAdmin, findByUserId} = require("../models/userModel")
 const {save} = require("../models/documentsModel")
 
-const password = process.env.BOT_USER_PASSWORD
+const password = process.env.BOT_USER_PASSWORD;
 var faylniJonatish = false;
 var natijaniBilish = false;
 var docId = null;
@@ -46,5 +46,5 @@ bot.on("message", (ctx => {
             }
         }
     })
-}))
+}));
 

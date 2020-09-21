@@ -9,18 +9,22 @@ mongoose.connect("mongodb+srv://jjkyuldashov:jasurbek123456@jasurbek.j2dlm.mongo
 const userSchema = new mongoose.Schema({
     userId: Number,
     is_admin: Boolean,
-    reads: Array
+    reads: Array,
+    cashBack:Number,
+    first_name: String,
+    last_name: String,
+    username: String
 })
 
-const User = new mongoose.model("User", userSchema)
+const User = new mongoose.model("User", userSchema);
 
 async function save(model) {
-    const user = new User(model)
-    const res = await user.save()
+    const user = new User(model);
+    const res = await user.save();
 }
 
 async function findByUserId(findUser) {
-    const user = await User.find({userId: findUser.id})
+    const user = await User.find({userId: findUser.id});
     if (user.length === 0) {
         save({
             userId: findUser.id,
