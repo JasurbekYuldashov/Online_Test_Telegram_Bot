@@ -7,7 +7,10 @@
     "start": "nodemon start"
   },
   "dependencies": {
+    "balanced-match": "^1.0.0",
+    "core-util-is": "^1.0.2",
     "dotenv": "^8.2.0",
+    "immer": "^7.0.9",
     "mongoose": "^5.10.2",
     "telegraf": "^3.38.0"
   }

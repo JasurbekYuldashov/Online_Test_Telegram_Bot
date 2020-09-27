@@ -8,11 +8,10 @@ mongoose.connect("mongodb+srv://jjkyuldashov:jasurbek123456@jasurbek.j2dlm.mongo
 
 const userSchema = new mongoose.Schema({
     userId: Number,
-    is_admin: Boolean,
-    reads: Array
-})
+    cashback: Number
+});
 
-const User = new mongoose.model("User", userSchema)
+const User = new mongoose.model("User", userSchema);
 
 async function save(model) {
     const user = new User(model)
@@ -24,8 +23,7 @@ async function findByUserId(findUser) {
     if (user.length === 0) {
         save({
             userId: findUser.id,
-            is_admin: false,
-            reads: []
+            cashback:0
         })
         return false
     } else {
@@ -36,7 +34,6 @@ async function findByUserId(findUser) {
 
 async function updateUserAdmin(userId) {
     const findUser = await User.find({userId: userId})
-    console.log(findUser)
     if (findUser[0].length !== 0) {
         findUser[0].is_admin = true;
         findUser[0].save()
@@ -45,7 +42,7 @@ async function updateUserAdmin(userId) {
     }
 }
 
-exports.save = save
-exports.updateAdmin = updateUserAdmin
-exports.findByUserId = findByUserId
-exports.mongoose = mongoose
+exports.save = save;
+exports.updateAdmin = updateUserAdmin;
+exports.findByUserId = findByUserId;
+exports.mongoose = mongoose;

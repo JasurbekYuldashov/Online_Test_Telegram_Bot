@@ -14,6 +14,12 @@ const documentSchema = new mongoose.Schema({
         lowercase: true,
         required: true,
         maxlength: 30
+    },
+    subject:{
+        type:String,
+        lowercase:true,
+        required:true,
+        maxlength: 20
     }
 })
 
@@ -34,6 +40,11 @@ async function save(model) {
 
 async function findById(id){
     const newAnswer = await Answer.find({uniqueId: id})
+    return newAnswer[0]!==undefined?newAnswer:[]
+}
+
+async function findBySubject(fan){
+    const newAnswer = await Answer.find({subject: fan})
     return newAnswer[0]!==undefined?newAnswer:[]
 }
 

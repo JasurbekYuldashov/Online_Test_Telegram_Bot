@@ -1,48 +1,97 @@
+const {Markup} = require("telegraf")
 const {bot} = require("../core/bot")
-const {updateAdmin, findByUserId} = require("../models/userModel")
-const {save} = require("../models/documentsModel")
+const {findByUserId} = require("../models/userModel")
+const {findById} = require("../models/userViewTest")
+// const s = require("TestOlish")
 
-const password = process.env.BOT_USER_PASSWORD
-var faylniJonatish = false;
-var natijaniBilish = false;
-var docId = null;
+const orqaga = "◀ Orqaga qaytish";
+var TestniTekshirishBosilganmi = false;
+var id = 0;
+
+const fanlar = [
+    "Matematika",
+    "Fizika",
+    "Ingiliz tili",
+    "Biologiya",
+    "Kimyo",
+    "Tarix",
+    "Geografiya",
+    "Nemis tili",
+    "Huquq",
+    "Ona tili",
+    orqaga
+];
+
+function YangiTestOlish(ctx) {
+    let a = fanlar.map(fan => Markup.button(fan))
+    console.log(a)
+    const keyboard = Markup.keyboard([...a]);
+    ctx.telegram.sendMessage(ctx.from.id, "Kerakli fanni tanlash", {reply_markup: keyboard});
+}
+
+function TestniTekshirish(ctx) {
+    if (TestniTekshirishBosilganmi){
+        ctx.telegram.sendMessage(ctx.from.id,"Javoblarni kiriting")
+        ctx.telegram.sendMessage(ctx.from.id,"Misol uchun\n abcdabcdabcdabcdabcdabcdab")
+    } else {
+        ctx.telegram.sendMessage(ctx.from.id,"Javoblarni kiriting")
+    }
+}
+
+function YangiTest(ctx) {
+    console.log("salom");
+}
+
+function HisobniTekshirish(ctx) {
+    console.log("salom");
+
+}
+
+function fanlarOrqaliTestOlish(fan, ctx) {
+    if (fan == orqaga) {
+        HomeMenu(ctx)
+    } else {
+        for (let i = 0; i < fanlar.length - 1; i++) {
+            if (fan === fanlar[i]) {
+                ctx.telegram.sendMessage(ctx.from.id, "Buyurtaming tez oradi jo'natiladi");
+                findById(ctx.from.id).then(r => {
+                    console.log(r)
+                })
+                HomeMenu(ctx);
+            }
+            ;
+        }
+    }
+}
+
+function HomeMenu(ctx) {
+    const keyboard = Markup.keyboard([
+        Markup.button("📁 Test olish"),
+        Markup.button("📑 Testni tekshirish"),
+        Markup.button("📫 Yangi test yaratish"),
+        Markup.button("💰 Hisobni tekshirish"),
+    ]);
+    ctx.telegram.sendMessage(
+        ctx.from.id,
+        "Kerakli buyruqni tanlang!",
+        {
+            reply_markup: keyboard
+        }
+    );
+}
 
 bot.on("message", (ctx => {
-    console.log(ctx.update)
     findByUserId(ctx.from).then(r => {
-        if (r == true) {
-            if (ctx.update.message.text !== undefined && "Yangi test yaratish") {
-                ctx.reply("Faylni jo'nating")
-                faylniJonatish = true
-            }
-            if (faylniJonatish && ctx.update.message.document !== undefined && ctx.update.message.caption !== undefined) {
-                console.log(ctx.update)
-                faylniJonatish = false;
-                var capation = ctx.update.message.caption;
-                var doc = ctx.update.message.document;
-                var probel = capation.indexOf(" ");
-                var indexDoc = capation.slice(0,probel)
-                var answers = capation.slice(probel+1,capation.length);
-                save({
-                    fileId:doc.file_unique_id,
-                    uniqueId:indexDoc,
-                    answers:answers
-                }).then(r=>{
-                    ctx.reply("saqladim!")
-                });
-            } else {
-                console.log(faylniJonatish)
-            }
-        } else {
-            if (ctx.update.message.text !== undefined && "Natijani bilish!") {
-                ctx.reply("Document 'Id'sini jo'nating ")
-                natijaniBilish=true
-            }
-            if (natijaniBilish && ctx.update.message.text !== undefined) {
-                var id = ctx.update.message.text
-
-            } else {
-                console.log(natijaniBilish)
+        if (ctx.updateType === "message") {
+            if (ctx.update.message.text === "📁 Test olish") YangiTestOlish(ctx)
+            if (ctx.update.message.text === "📑 Testni tekshirish") TestniTekshirish(ctx);
+            if (ctx.update.message.text === "📫 Yangi test yaratish") YangiTest(ctx);
+            if (ctx.update.message.text === "💰 Hisobni tekshirish") HisobniTekshirish(ctx)
+            for (let i = 0; i < fanlar.length; i++) {
+                if (fanlar[i] === ctx.update.message.text) {
+                    fanlarOrqaliTestOlish(fanlar[i], ctx);
+                    break;
+                }
             }
         }
     })
