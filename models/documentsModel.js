@@ -15,6 +15,10 @@ const documentSchema = new mongoose.Schema({
         required: true,
         maxlength: 30
     },
+    userId:{
+        required:true,
+        type:Number
+    },
     subject:{
         type:String,
         lowercase:true,
@@ -30,7 +34,6 @@ async function save(model) {
     if (newAnswer.length === 0) {
         const doc = Answer(model);
         const res = await doc.save()
-        console.log(model)
         return true;
     } else {
         console.log("document mavjud")

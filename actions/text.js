@@ -7,24 +7,10 @@ const {TestniTekshirish} = require("./TestniTekshirish")
 const {YangiTest} = require("./YangiTestYaratish")
 const {HisobniTekshirish} = require("./HisobniTekshirish")
 const {HomeMenu} = require("./HomeMenu")
+const {orqaga,fanlar} = require("../constants/subjects")
 
-const orqaga = "◀ Orqaga qaytish";
 var TestniTekshirishBosilganmi = false;
 var id = 0;
-
-const fanlar = [
-    "Matematika",
-    "Fizika",
-    "Ingiliz tili",
-    "Biologiya",
-    "Kimyo",
-    "Tarix",
-    "Geografiya",
-    "Nemis tili",
-    "Huquq",
-    "Ona tili",
-    orqaga
-];
 
 function fanlarOrqaliTestOlish(fan, ctx) {
     if (fan === orqaga) {

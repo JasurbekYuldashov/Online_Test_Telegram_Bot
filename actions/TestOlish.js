@@ -1,19 +1,5 @@
 const {Markup} = require("telegraf")
-const orqaga = "◀ Orqaga qaytish";
-
-const fanlar = [
-    "Matematika",
-    "Fizika",
-    "Ingiliz tili",
-    "Biologiya",
-    "Kimyo",
-    "Tarix",
-    "Geografiya",
-    "Nemis tili",
-    "Huquq",
-    "Ona tili",
-    orqaga
-];
+const {orqaga,fanlar} = require("../constants/subjects")
 
 function YangiTestOlish(ctx) {
     let arraySubjects = fanlar.map(fan => Markup.button(fan))
