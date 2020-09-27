@@ -6,6 +6,7 @@ const {YangiTestOlish} = require("./TestOlish");
 const {TestniTekshirish} = require("./TestniTekshirish")
 const {YangiTest} = require("./YangiTestYaratish")
 const {HisobniTekshirish} = require("./HisobniTekshirish")
+const {HomeMenu} = require("./HomeMenu")
 
 const orqaga = "◀ Orqaga qaytish";
 var TestniTekshirishBosilganmi = false;
@@ -26,7 +27,7 @@ const fanlar = [
 ];
 
 function fanlarOrqaliTestOlish(fan, ctx) {
-    if (fan == orqaga) {
+    if (fan === orqaga) {
         HomeMenu(ctx)
     } else {
         for (let i = 0; i < fanlar.length - 1; i++) {
@@ -40,22 +41,6 @@ function fanlarOrqaliTestOlish(fan, ctx) {
             ;
         }
     }
-}
-
-function HomeMenu(ctx) {
-    const keyboard = Markup.keyboard([
-        Markup.button("📁 Test olish"),
-        Markup.button("📑 Testni tekshirish"),
-        Markup.button("📫 Yangi test yaratish"),
-        Markup.button("💰 Hisobni tekshirish"),
-    ]);
-    ctx.telegram.sendMessage(
-        ctx.from.id,
-        "Kerakli buyruqni tanlang!",
-        {
-            reply_markup: keyboard
-        }
-    );
 }
 
 bot.on("message", (ctx => {
