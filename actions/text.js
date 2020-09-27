@@ -1,11 +1,11 @@
-const {bot} = require("../core/bot")
-const {findByUserId} = require("../models/userModel")
+const {bot} = require("../core/bot");
+const {findByUserId} = require("../models/userModel");
 const {YangiTestOlish} = require("./GetNewTest/TestOlish");
-const {TestniTekshirish} = require("./TestniTekshirish")
-const {YangiTest} = require("./YangiTestYaratish")
-const {HisobniTekshirish} = require("./HisobniTekshirish")
+const {TestniTekshirish} = require("./CheckTest/TestniTekshirish");
+const {YangiTest} = require("./CreateNewTest/YangiTestYaratish");
+const {HisobniTekshirish} = require("./CheckCashBack/HisobniTekshirish");
 const {fanlarOrqaliTestOlish} = require("./GetNewTest/FanlarOrqaliTestOlish");
-const {orqaga, fanlar} = require("../constants/subjects")
+const {fanlar} = require("../constants/subjects");
 
 
 bot.on("message", (ctx => {
