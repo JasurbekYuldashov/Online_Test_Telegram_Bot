@@ -1,33 +1,12 @@
-const {Markup} = require("telegraf")
 const {bot} = require("../core/bot")
 const {findByUserId} = require("../models/userModel")
-const {findById} = require("../models/userViewTest")
-const {YangiTestOlish} = require("./TestOlish");
+const {YangiTestOlish} = require("./GetNewTest/TestOlish");
 const {TestniTekshirish} = require("./TestniTekshirish")
 const {YangiTest} = require("./YangiTestYaratish")
 const {HisobniTekshirish} = require("./HisobniTekshirish")
-const {HomeMenu} = require("./HomeMenu")
-const {orqaga,fanlar} = require("../constants/subjects")
+const {fanlarOrqaliTestOlish} = require("./GetNewTest/FanlarOrqaliTestOlish");
+const {orqaga, fanlar} = require("../constants/subjects")
 
-var TestniTekshirishBosilganmi = false;
-var id = 0;
-
-function fanlarOrqaliTestOlish(fan, ctx) {
-    if (fan === orqaga) {
-        HomeMenu(ctx)
-    } else {
-        for (let i = 0; i < fanlar.length - 1; i++) {
-            if (fan === fanlar[i]) {
-                ctx.telegram.sendMessage(ctx.from.id, "Buyurtaming tez oradi jo'natiladi");
-                findById(ctx.from.id).then(r => {
-                    console.log(r)
-                })
-                HomeMenu(ctx);
-            }
-            ;
-        }
-    }
-}
 
 bot.on("message", (ctx => {
     findByUserId(ctx.from).then(r => {
@@ -44,5 +23,5 @@ bot.on("message", (ctx => {
             }
         }
     })
-}))
+}));
 

@@ -1,3 +1,6 @@
+var TestniTekshirishBosilganmi = false;
+var id = 0;
+
 function TestniTekshirish(ctx) {
     if (TestniTekshirishBosilganmi){
         ctx.telegram.sendMessage(ctx.from.id,"Javoblarni kiriting")
