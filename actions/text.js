@@ -2,7 +2,10 @@ const {Markup} = require("telegraf")
 const {bot} = require("../core/bot")
 const {findByUserId} = require("../models/userModel")
 const {findById} = require("../models/userViewTest")
-// const s = require("TestOlish")
+const {YangiTestOlish} = require("./TestOlish");
+const {TestniTekshirish} = require("./TestniTekshirish")
+const {YangiTest} = require("./YangiTestYaratish")
+const {HisobniTekshirish} = require("./HisobniTekshirish")
 
 const orqaga = "◀ Orqaga qaytish";
 var TestniTekshirishBosilganmi = false;
@@ -21,31 +24,6 @@ const fanlar = [
     "Ona tili",
     orqaga
 ];
-
-function YangiTestOlish(ctx) {
-    let a = fanlar.map(fan => Markup.button(fan))
-    console.log(a)
-    const keyboard = Markup.keyboard([...a]);
-    ctx.telegram.sendMessage(ctx.from.id, "Kerakli fanni tanlash", {reply_markup: keyboard});
-}
-
-function TestniTekshirish(ctx) {
-    if (TestniTekshirishBosilganmi){
-        ctx.telegram.sendMessage(ctx.from.id,"Javoblarni kiriting")
-        ctx.telegram.sendMessage(ctx.from.id,"Misol uchun\n abcdabcdabcdabcdabcdabcdab")
-    } else {
-        ctx.telegram.sendMessage(ctx.from.id,"Javoblarni kiriting")
-    }
-}
-
-function YangiTest(ctx) {
-    console.log("salom");
-}
-
-function HisobniTekshirish(ctx) {
-    console.log("salom");
-
-}
 
 function fanlarOrqaliTestOlish(fan, ctx) {
     if (fan == orqaga) {

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-mongoose.connect("mongodb+srv://jjkyuldashov:jasurbek123456@jasurbek.j2dlm.mongodb.net/<dbname>?retryWrites=true&w=majority").then(r => {
+mongoose.connect(process.env.MONGODB_URL).then(r => {
     console.log("ulandi")
 }).catch(e => {
     console.log("error")
