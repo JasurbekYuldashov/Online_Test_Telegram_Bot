@@ -2,29 +2,25 @@ const {mongoose} = require("./userModel")
 
 const documentSchema = new mongoose.Schema({
     fileId: {
-        type:String,
-        required: true
+        type: String
     },
     uniqueId: {
-        type:String,
-        required: true
+        type: String
     },
     answers: {
         type: String,
         lowercase: true,
-        required: true,
         maxlength: 30
     },
-    userId:{
-        required:true,
-        type:Number
+    userId: {
+        type: Number
     },
-    subject:{
-        type:String,
-        lowercase:true,
-        required:true,
+    subject: {
+        type: String,
+        lowercase: true,
         maxlength: 20
-    }
+    },
+    countTest:Number
 })
 
 const Answer = new mongoose.model("document", documentSchema);
@@ -41,14 +37,41 @@ async function save(model) {
     }
 }
 
-async function findById(id){
+async function findById(id) {
     const newAnswer = await Answer.find({uniqueId: id})
-    return newAnswer[0]!==undefined?newAnswer:[]
+    return newAnswer.length === 0 ? true : false;
 }
 
-async function findBySubject(fan){
+async function getById(id) {
+    const newAnswer = await Answer.findOne({_id: id})
+    return newAnswer
+}
+
+async function getByUniqueId(id) {
+    const newAnswer = await Answer.find({uniqueId: id})
+    return newAnswer.length > 0 ? newAnswer[0] : null
+}
+
+async function getLastUniqueId() {
+    const newAnswer = await Answer.find()
+    return newAnswer.length > 0 ? newAnswer[newAnswer.length - 1].uniqueId : 0
+}
+
+async function findBySubject(subject) {
+    mongoose.model('document').schema.add({countTest: Number});
+    const newAnswer = await Answer.find({subject: subject})
+    return newAnswer
+
+}
+
+async function findBySubject(fan) {
     const newAnswer = await Answer.find({subject: fan})
-    return newAnswer[0]!==undefined?newAnswer:[]
+    return newAnswer[0] !== undefined ? newAnswer : []
 }
 
-exports.save = save
+exports.save = save;
+exports.findByUniqueId = findById;
+exports.getLastUniqueId = getLastUniqueId;
+exports.findBySubject = findBySubject;
+exports.getByUniqueIdOnDocuments = getByUniqueId;
+exports.getByIdOnDocuments = getById;
